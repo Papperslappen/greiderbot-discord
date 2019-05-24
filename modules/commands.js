@@ -67,21 +67,22 @@ addCommand("spela",(args,message) => {
         return "Kommandot !spela funkar bara i vanliga textkanaler";
     }
     let spel = args[0];
-    let role = _.find(message.guild.roles,(r => {r.name.toLowerCase() == `spela ${spel}`.toLowerCase()}));
+    let role = _.find(message.guild.roles.array(),r => (r.name == "spela "+spel));
+    console.log(role);
     if(role){
-        message.member.addRole(role,`La till rollen ${role.name} på begäran av användaren`)
-        .then(console.log)
+        message.member.addRole(role,`[BOT] La till rollen ${role.name} på begäran av användaren`)
+        .then(console.log,console.err)
         .catch(console.err);
-        return `Grattis, du är nu tillagd i spela ${spel}`;
+        return "Du ska nu vara tillagd i spela "+spel;
     }else{
         let names = _.map(message.guild.roles.array(),r => r.name)
             .filter(s=>s.startsWith("spela"))
             .join(", ");
         return `Tyvärr finns inte ${spel} som pingningsbar roll (än),
-        kontakta en administratör för att få det fixat. 
+        kontakta en administratör för att få det fixat.
         Roller som finns för tillfället: ${names}`;
     }
-    
+
 }, `Anv: !spela <spel> tex. spela CS. Lägger till dig i rollen för spelet för att kommunicera till
 andra att du är intresserad av att spela spelet.`);
 
@@ -94,6 +95,13 @@ addCommand("sluta",(args,message)=>{
         return "Kommandot !spela funkar bara i vanliga textkanaler";
     }
     let spel = args[0];
-    let role = message.guild.roles.find(r => {r.name.toLowerCase() == `spela ${spel}`.toLowerCase()});
-    message.member.removeRole()
+    let role = _.find(message.member.roles.array(),r => (r.name == "spela "+spel));
+    if(role){
+      message.member.removeRole()
+        .then(console.log,console.err)
+        .catch(console.log);
+      return "Du är inte längre med i spela "+spel;
+    }else{
+      return "Något gick snett"
+    }
 }, "Anv: !sluta <spel>. Gå ur rollen för <spel>")
