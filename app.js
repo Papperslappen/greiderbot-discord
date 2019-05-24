@@ -1,7 +1,8 @@
-const commando = require('discord.js');
-const config = require('./config.js');
+const discord = require('discord.js');
+const config = require('./config');
 const path = require('path');
-const client = new commando.Client({
+const commands = require('./modules/commands')
+const client = new discord.Client({
     owner: config.discord.bot_owner,
 });
 
@@ -19,8 +20,19 @@ client
         console.log(`WARNING! Rate limit Path: ${rateLimitInfo.path}`);
     })
     .on('message',(message) => {
-        console.log(message.content);
+        let result = commands.processCommand(message);
+        if(result){
+            message.reply(result)
+            .then(m => {console.log(m.content)})
+            .catch(console.error);
+
+          //  message.delete()
+          //  .then(console.log)
+          //  .catch(console.error);
+        }
+
     });
+
 
 function main() {
     console.log("Starting Bot");
