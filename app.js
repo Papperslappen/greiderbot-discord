@@ -1,9 +1,10 @@
-const discord = require('discord.js');
+const commando = require('discord.js-commando');
 const config = require('./config');
 const path = require('path');
-const commands = require('./modules/commands')
-const client = new discord.Client({
+const sqlite = require('sqlite');
+const client = new commando.Client({
     owner: config.discord.bot_owner,
+    commandPrefix: config.discord.commandPrefix,
 });
 
 client
@@ -18,21 +19,13 @@ client
     })
     .on('rateLimit', (rateLimitInfo) => {
         console.log(`WARNING! Rate limit Path: ${rateLimitInfo.path}`);
-    })
-    .on('message',(message) => {
-        let result = commands.processCommand(message);
-        if(result){
-            message.reply(result)
-            .then(m => {console.log(m.content)})
-            .catch(console.error);
-
-          //  message.delete()
-          //  .then(console.log)
-          //  .catch(console.error);
-        }
-
     });
 
+client.setProvider(
+	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))
+).catch(console.error);
+client.registry.registerDefaults();
+require('./modules/playgroups').init(client)
 
 function main() {
     console.log("Starting Bot");
