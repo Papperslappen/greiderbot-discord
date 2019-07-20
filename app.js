@@ -4,7 +4,7 @@ const path = require('path');
 const sqlite = require('sqlite');
 const client = new commando.Client({
     owner: config.discord.bot_owner,
-    commandPrefix: config.discord.commandPrefix,
+    commandPrefix: config.discord.prefix,
 });
 
 client
