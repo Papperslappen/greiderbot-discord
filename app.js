@@ -12,7 +12,7 @@ client
     .on('warn',console.warn)
     .on('debug', console.log)
     .on('disconnect', () => { console.warn('Disconnected!'); })
-	.on('reconnecting', () => { console.warn('Reconnecting...'); })
+	  .on('reconnecting', () => { console.warn('Reconnecting...'); })
     .on('ready', () => {
         console.log(`Logged in as ${client.user.tag}!`);
         console.log(`Connected to guilds [${client.guilds.map(v => { return v.name })}]`);
