@@ -26,6 +26,7 @@ client.setProvider(
 ).catch(console.error);
 client.registry.registerDefaults();
 require('./modules/playgroups').init(client)
+require('./modules/dicebot').init(client)
 
 function main() {
     console.log("Starting Bot");
