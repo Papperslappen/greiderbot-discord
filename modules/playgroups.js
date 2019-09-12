@@ -22,7 +22,7 @@ class AddToPlayGroup extends commando.Command {
 			memberName: 'spela',
 			description: 'Lägger dig i en pingningsbar roll för ett spel.',
             details: `
-            Anv: !spela <spel> – Lägger till dig i en roll som andra kan pinga när de vill spela det spelet` 
+            Anv: !spela <spel> – Lägger till dig i en roll som andra kan pinga när de vill spela det spelet`
 			,
 			examples: ['!spela cs'],
 
@@ -39,6 +39,9 @@ class AddToPlayGroup extends commando.Command {
 
 	async run(msg, args) {
         let spel = args.spel
+        if(spel == "allan"){
+          return msg.reply("",{file:random_allan()});
+        }
         if(!msg.guild){
             return msg.reply(`Det här kommandot kan inte användas i DM`);
         }
@@ -55,7 +58,7 @@ class AddToPlayGroup extends commando.Command {
             kontakta en administratör för att få det fixat.
             Roller som finns för tillfället: ${names}`);
         }
-    
+
     }
 };
 
@@ -68,7 +71,7 @@ class RemoveFromPlayGroup extends commando.Command {
 			memberName: 'sluta',
 			description: 'Tar bort dig från en roll',
             details: `
-            Anv: !sluta <spel> – Tar bort dig från en roll` 
+            Anv: !sluta <spel> – Tar bort dig från en roll`
 			,
 			examples: ['!sluta cs'],
 
@@ -96,8 +99,16 @@ class RemoveFromPlayGroup extends commando.Command {
               .catch(console.log);
             return msg.reply("Du är inte längre med i spela "+spel);
           }else{
-             return msg.reply(`Det finns ingen roll som heter ${rolename}`) 
+             return msg.reply(`Det finns ingen roll som heter ${rolename}`)
           }
     }
 };
 
+function random_allan(){
+  allans = [
+    "https://media.giphy.com/media/7U5k73n4CuuKQ/giphy.gif",
+    "https://media.giphy.com/media/TAbgN3sgs7veo/giphy.gif",
+    "https://media.giphy.com/media/MrUwoRBik4Lja/giphy.gif",
+  ]
+  return _.sample(allans);
+}
