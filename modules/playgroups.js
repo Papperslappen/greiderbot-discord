@@ -42,6 +42,9 @@ class AddToPlayGroup extends commando.Command {
         if(spel == "allan"){
           return msg.reply("",{file:random_allan()});
         }
+        if(spel == "shoreline"){
+          return msg.reply("https://youtu.be/VV_irnCV7xc");
+        }
         if(!msg.guild){
             return msg.reply(`Det här kommandot kan inte användas i DM`);
         }
