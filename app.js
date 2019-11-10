@@ -10,7 +10,7 @@ const client = new commando.Client({
 client
     .on('error',console.error)
     .on('warn',console.warn)
-    .on('debug', console.log)
+    //.on('debug', console.log)
     .on('disconnect', () => { console.warn('Disconnected!'); })
 	  .on('reconnecting', () => { console.warn('Reconnecting...'); })
     .on('ready', () => {
@@ -25,8 +25,10 @@ client.setProvider(
 	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))
 ).catch(console.error);
 client.registry.registerDefaults();
-require('./modules/playgroups').init(client)
-require('./modules/dicebot').init(client)
+
+require('./modules/playgroups').init(client);
+require('./modules/dicebot').init(client);
+require('./modules/greeter').init(client);
 
 function main() {
     console.log("Starting Bot");

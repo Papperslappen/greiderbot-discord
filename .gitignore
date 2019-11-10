@@ -83,5 +83,8 @@ typings/
 # Sqlite
 *.sqlite3
 
+# Node Persist
+.node-persist/
+
 # MacOS
 **/.DS_Store
