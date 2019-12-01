@@ -6,6 +6,8 @@ const statuses = [
   "Spelar Allan",
   "har inte så många förhoppningar",
   "dagarna är som små sekel",
+  "ringsaka rangsaka ringsaksa",
+  "limma skinkbit, roligt",
 ];
 
 function setRandomStatus(client){
