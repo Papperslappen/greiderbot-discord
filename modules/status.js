@@ -10,6 +10,7 @@ const statuses = [
   "limma skinkbit, roligt",
   "Piano",
   "spelar spelar spelar",
+  "Aj aj aj, Rastapopoulos"
 ];
 
 function setRandomStatus(client){
