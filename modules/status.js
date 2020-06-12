@@ -3,11 +3,14 @@ var _ = require('lodash');
 const statuses = [
   "känner en bot",
   "I väntan på nästa OS",
-  "Spelar Allan",
+  "Allan",
   "har inte så många förhoppningar",
   "dagarna är som små sekel",
   "ringsaka rangsaka ringsaksa",
   "limma skinkbit, roligt",
+  "Piano",
+  "spelar spelar spelar",
+  "Aj aj aj, Rastapopoulos"
 ];
 
 function setRandomStatus(client){
