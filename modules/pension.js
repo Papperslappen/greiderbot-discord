@@ -64,7 +64,7 @@ class PensionChannel extends commando.Command {
     });
   }
   hasPermission(msg) {
-    var canUseCommand = this.client.isOwner(msg.author) || msg.member.hasPermission('ADMINISTRATOR');
+    var canUseCommand = this.client.isOwner(msg.author) || msg.member.roles.some(role => role.name === "Admin");
     // var canMoveChannel = msg.guild.me.hasPermission()
     // var canEditChannelPermissions = ;
     return canUseCommand;
@@ -81,7 +81,8 @@ class PensionChannel extends commando.Command {
         .setTimestamp()
         .setFooter(`${this.client.user.username}`);
       const pensionMessage = await msg.channel.send({ embed });
-      await msg.channel.setParent(category, `Flyttades på begäran av ${msg.author.tag}`);
+      var channel = await msg.channel.setParent(category, `Flyttades på begäran av ${msg.author.tag}`);
+      await channel.lockPermissions();
       await msg.delete();
     } catch (e) {
       console.error(e);
