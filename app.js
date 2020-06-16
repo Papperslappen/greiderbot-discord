@@ -32,6 +32,7 @@ require('./modules/dicebot').init(client);
 require('./modules/greeter').init(client);
 require('./modules/status').init(client);
 require('./modules/emotes').init(client);
+require('./modules/pension.js').init(client);
 
 function main() {
     console.log("Starting Bot");
