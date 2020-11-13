@@ -16,7 +16,7 @@ client
 	  .on('reconnecting', () => { console.warn('Reconnecting...'); })
     .on('ready', () => {
         console.log(`Logged in as ${client.user.tag}!`);
-        console.log(`Connected to guilds [${client.guilds.map(v => { return v.name })}]`);
+        console.log(`Connected to guilds [${client.guilds.cache.map(v => { return v.name })}]`);
     })
     .on('rateLimit', (rateLimitInfo) => {
         console.log(`WARNING! Rate limit Path: ${rateLimitInfo.path}`);
@@ -25,6 +25,7 @@ client
 client.setProvider(
 	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))
 ).catch(console.error);
+
 client.registry.registerDefaults();
 
 require('./modules/playgroups').init(client);

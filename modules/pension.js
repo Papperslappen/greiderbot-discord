@@ -64,7 +64,7 @@ class PensionChannel extends commando.Command {
     });
   }
   hasPermission(msg) {
-    var canUseCommand = this.client.isOwner(msg.author) || msg.member.roles.some(role => role.name === "Admin");
+    var canUseCommand = this.client.isOwner(msg.author) || msg.member.roles.cache.some(role => role.name === "Admin");
     // var canMoveChannel = msg.guild.me.hasPermission()
     // var canEditChannelPermissions = ;
     return canUseCommand;

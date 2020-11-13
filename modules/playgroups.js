@@ -54,7 +54,7 @@ class AddToPlayGroup extends commando.Command {
             await msg.member.addRole(role,`[BOT] La till rollen ${role.name} på begäran av användaren`);
             return msg.reply(`Du ska nu vara tillagd i spela ${spel}, för att gå ur rollen, använd kommandot sluta ${spel}`);
         }else{
-            let names = _.map(msg.guild.roles.array(),r => r.name)
+            let names = _.map(msg.guild.roles.cache.array(),r => r.name)
                 .filter(s=>s.startsWith("spela"))
                 .join(", ");
             return msg.reply(`Tyvärr finns inte ${spel} som pingningsbar roll (än),
@@ -95,7 +95,7 @@ class RemoveFromPlayGroup extends commando.Command {
         }
         let spel = args.spel;
         let rolename = `spela ${spel}`;
-        let role = _.find(msg.member.roles.array(), r => (r.name == rolename));
+        let role = _.find(msg.member.roles.cache.array(), r => (r.name == rolename));
         console.log(role)
         if(role){
             await msg.member.removeRole(role)
