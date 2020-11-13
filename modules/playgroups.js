@@ -48,10 +48,10 @@ class AddToPlayGroup extends commando.Command {
         if(!msg.guild){
             return msg.reply(`Det här kommandot kan inte användas i DM`);
         }
-        let role = _.find(msg.guild.roles.array(),r => (r.name == "spela "+spel));
+        let role = _.find(msg.guild.roles.cache.array(),r => (r.name == "spela "+spel));
         console.log(role);
         if(role){
-            await msg.member.addRole(role,`[BOT] La till rollen ${role.name} på begäran av användaren`);
+            await msg.member.roles.add(role,`[BOT] La till rollen ${role.name} på begäran av användaren`);
             return msg.reply(`Du ska nu vara tillagd i spela ${spel}, för att gå ur rollen, använd kommandot sluta ${spel}`);
         }else{
             let names = _.map(msg.guild.roles.cache.array(),r => r.name)
@@ -96,9 +96,9 @@ class RemoveFromPlayGroup extends commando.Command {
         let spel = args.spel;
         let rolename = `spela ${spel}`;
         let role = _.find(msg.member.roles.cache.array(), r => (r.name == rolename));
-        console.log(role)
+        //console.log(role)
         if(role){
-            await msg.member.removeRole(role)
+            await msg.member.roles.remove(role)
               .catch(console.log);
             return msg.reply("Du är inte längre med i spela "+spel);
           }else{
