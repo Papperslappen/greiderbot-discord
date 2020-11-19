@@ -36,7 +36,7 @@ class Mix extends commando.Command {
 	}
   async run(msg,args){
     try{
-        var embed = new discord.RichEmbed()
+        var embed = new discord.MessageEmbed()
           .setColor(0x11CCFF)
           .setAuthor(msg.author.username, msg.author.avatarURL)
           .setDescription(`${
