@@ -26,7 +26,9 @@ client.setProvider(
 	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))
 ).catch(console.error);
 
-client.registry.registerDefaults();
+client.registry.registerDefaultTypes();
+client.registry.registerDefaultGroups();
+client.registry.registerDefaultCommands({unknownCommand:false});
 
 require('./modules/playgroups').init(client);
 require('./modules/dicebot').init(client);
