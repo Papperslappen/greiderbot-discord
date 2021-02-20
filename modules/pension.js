@@ -73,7 +73,7 @@ class PensionChannel extends commando.Command {
     console.log("command pensionera");
     try {
       var category = await storage.getItem("pension_category");
-      var embed = new discord.RichEmbed()
+      var embed = new discord.MessageEmbed()
         .setTitle("Denna kanal kommer raderas inom kort")
         .setColor(0xFFFF00)
         .setAuthor(msg.author.username, msg.author.avatarURL)
